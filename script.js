@@ -139,9 +139,33 @@ window.addEventListener('scroll', () => {
 // Add loading animation
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
+    createParticles();
 });
 
-// Add CSS for loading animation
+// Create floating particles effect
+function createParticles() {
+    const hero = document.querySelector('.hero');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 4 + 2}px;
+            height: ${Math.random() * 4 + 2}px;
+            background: rgba(79, 70, 229, ${Math.random() * 0.5 + 0.1});
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: float-particle ${Math.random() * 20 + 10}s linear infinite;
+            z-index: 1;
+        `;
+        hero.appendChild(particle);
+    }
+}
+
+// Add CSS for loading animation and particles
 const style = document.createElement('style');
 style.textContent = `
     body {
@@ -163,6 +187,23 @@ style.textContent = `
     
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    @keyframes float-particle {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
     }
 `;
 document.head.appendChild(style);
