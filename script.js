@@ -72,30 +72,50 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        // Show loading state
+        submitBtn.textContent = 'Enviando...';
+        submitBtn.disabled = true;
+        
         // Get form data
-        const formData = new FormData(this);
         const name = this.querySelector('input[type="text"]').value;
         const email = this.querySelector('input[type="email"]').value;
         const subject = this.querySelectorAll('input[type="text"]')[1].value;
         const message = this.querySelector('textarea').value;
         
-        // Create mailto link
-        const mailtoLink = `mailto:hugohcsalis2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        const button = this.querySelector('.btn-primary');
-        const originalText = button.textContent;
-        button.textContent = 'Mensagem Enviada!';
-        button.style.background = '#48bb78';
-        
+        // Simulate form submission (replace with actual service)
         setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '';
-            this.reset();
-        }, 3000);
+            // Show success message
+            submitBtn.textContent = 'Mensagem Enviada!';
+            submitBtn.style.background = '#10b981';
+            
+            // Show success message and provide contact options
+            setTimeout(() => {
+                const userChoice = confirm('Mensagem preparada com sucesso!\n\nDeseja abrir seu cliente de email para enviar?\n\nOK = Abrir email\nCancelar = Copiar dados para contato manual');
+                
+                if (userChoice) {
+                    // Open email client
+                    const mailtoLink = `mailto:hugohcsalis2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)}`;
+                    window.location.href = mailtoLink;
+                } else {
+                    // Copy contact info to clipboard
+                    const contactInfo = `Email: hugohcsalis2@gmail.com\nAssunto: ${subject}\n\nNome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
+                    navigator.clipboard.writeText(contactInfo).then(() => {
+                        alert('Informações copiadas para a área de transferência!\nVocê pode colar em qualquer aplicativo de mensagem.');
+                    }).catch(() => {
+                        alert('Email de contato: hugohcsalis2@gmail.com\n\nSuas informações estão prontas para envio manual.');
+                    });
+                }
+                
+                // Reset form
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 1000);
+        }, 1500);
     });
 }
 
