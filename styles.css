@@ -255,6 +255,53 @@ body {
     margin-bottom: 2rem;
 }
 
+.hero-special-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.special-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #4a5568;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+}
+
+.special-link:hover {
+    transform: translateY(-3px);
+    border-color: #667eea;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.special-link i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+}
+
+.special-link span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.special-link small {
+    font-size: 0.75rem;
+    color: #718096;
+    font-weight: 400;
+}
+
 .hero-social {
     display: flex;
     gap: 1rem;
