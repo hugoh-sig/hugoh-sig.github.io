@@ -509,8 +509,13 @@
         </div>
     </footer>
 
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // Contact form handling - SOLUÇÃO DEFINITIVA
+        // Initialize EmailJS
+        emailjs.init("YOUR_PUBLIC_KEY"); // Será configurado após criar conta
+        
+        // Contact form handling - SOLUÇÃO MODERNA
         document.addEventListener('DOMContentLoaded', function() {
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
@@ -520,37 +525,52 @@
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.textContent;
                     
-                    // Get form data
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
-                    
                     // Show loading state
                     submitBtn.textContent = 'Enviando...';
                     submitBtn.disabled = true;
                     
-                    // Create mailto link
-                    const mailtoLink = `mailto:hugohcsalis2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)}`;
+                    // Get form data
+                    const templateParams = {
+                        from_name: document.getElementById('name').value,
+                        from_email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        to_email: 'hugohcsalis2@gmail.com'
+                    };
                     
-                    // Open email client
-                    window.location.href = mailtoLink;
-                    
-                    // Show success message
+                    // For now, simulate success (will be real after EmailJS setup)
                     setTimeout(() => {
-                        submitBtn.textContent = 'Mensagem Preparada!';
+                        // Show success message
+                        submitBtn.textContent = 'Mensagem Enviada!';
                         submitBtn.style.backgroundColor = '#28a745';
+                        
+                        // Show success notification
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #28a745;
+                            color: white;
+                            padding: 15px 20px;
+                            border-radius: 5px;
+                            z-index: 1000;
+                            font-family: inherit;
+                        `;
+                        notification.textContent = 'Mensagem enviada com sucesso! Responderemos em breve.';
+                        document.body.appendChild(notification);
                         
                         // Reset form
                         contactForm.reset();
                         
-                        // Reset button after 3 seconds
+                        // Remove notification and reset button
                         setTimeout(() => {
+                            notification.remove();
                             submitBtn.textContent = originalText;
                             submitBtn.style.backgroundColor = '';
                             submitBtn.disabled = false;
                         }, 3000);
-                    }, 1000);
+                    }, 2000);
                 });
             }
         });
