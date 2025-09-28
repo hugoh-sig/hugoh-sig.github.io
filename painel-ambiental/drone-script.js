@@ -12,11 +12,11 @@ function initializeStoryMap() {
         // Create a simple visual representation
         mapElement.innerHTML = `
             <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.8;"></i>
+                <i class="fas fa-camera" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.8;"></i>
                 <div style="text-align: center;">
-                    <h4 style="margin-bottom: 0.5rem;">Território Quilombola</h4>
-                    <p style="opacity: 0.8; font-size: 0.9rem;">380 hectares mapeados</p>
-                    <p style="opacity: 0.8; font-size: 0.9rem;">12 famílias envolvidas</p>
+                    <h4 style="margin-bottom: 0.5rem;">Especificações Técnicas</h4>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Resolução 2.5cm GSD</p>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Sobreposição 85%</p>
                 </div>
             </div>
         `;
