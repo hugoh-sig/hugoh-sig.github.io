@@ -463,20 +463,20 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form action="https://formspree.io/hugohcsalis2@gmail.com" method="POST">
+                    <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" name="name" placeholder="Seu Nome" required>
+                            <input type="text" id="name" placeholder="Seu Nome" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Seu Email" required>
+                            <input type="email" id="email" placeholder="Seu Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="subject" placeholder="Assunto" required>
+                            <input type="text" id="subject" placeholder="Assunto" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+                            <textarea id="message" placeholder="Sua Mensagem" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        <button type="submit">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -510,24 +510,47 @@
     </footer>
 
     <script>
-        // Contact form handling - INLINE para evitar cache
+        // Contact form handling - SOLUÇÃO DEFINITIVA
         document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.querySelector('.contact-form form');
+            const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.textContent;
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
                     
                     // Show loading state
                     submitBtn.textContent = 'Enviando...';
                     submitBtn.disabled = true;
                     
-                    // Let the form submit naturally to Formspree
-                    // Reset button after timeout
+                    // Create mailto link
+                    const mailtoLink = `mailto:hugohcsalis2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)}`;
+                    
+                    // Open email client
+                    window.location.href = mailtoLink;
+                    
+                    // Show success message
                     setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }, 10000);
+                        submitBtn.textContent = 'Mensagem Preparada!';
+                        submitBtn.style.backgroundColor = '#28a745';
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            submitBtn.textContent = originalText;
+                            submitBtn.style.backgroundColor = '';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    }, 1000);
                 });
             }
         });
