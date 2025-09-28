@@ -66,40 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Contact form handling with Formspree
-const contactForm = document.querySelector('.contact-form form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.disabled = true;
-        
-        // Let the form submit naturally to Formspree
-        // The success/error handling will be done by Formspree's redirect
-        
-        // Add a timeout to reset button if something goes wrong
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 10000);
-    });
-    
-    // Handle successful submission (if user returns to page)
-    if (window.location.search.includes('success')) {
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = 'Mensagem Enviada!';
-        submitBtn.style.background = '#10b981';
-        contactForm.reset();
-        
-        setTimeout(() => {
-            submitBtn.textContent = 'Enviar Mensagem';
-            submitBtn.style.background = '';
-        }, 3000);
-    }
-}
+
 
 // Typing animation for hero title
 function typeWriter(element, text, speed = 100) {

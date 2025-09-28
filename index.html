@@ -462,22 +462,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Seu Nome" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Seu Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" placeholder="Assunto" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" placeholder="Sua Mensagem" rows="5" required></textarea>
-                        </div>
-                        <button type="submit">Enviar Mensagem</button>
-                    </form>
+                <div class="contact-message">
+                    <h3>Gostou do meu trabalho?</h3>
+                    <p>Estou sempre em busca de novos desafios e colaborações. Se você tem um projeto em mente, uma oportunidade de trabalho ou simplesmente quer trocar ideias sobre geotecnologias, ficarei feliz em conversar.</p>
+                    <a href="mailto:hugohcsalis2@gmail.com" class="btn btn-primary">Enviar um E-mail</a>
                 </div>
             </div>
         </div>
@@ -509,72 +497,7 @@
         </div>
     </footer>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        // Initialize EmailJS
-        emailjs.init("YOUR_PUBLIC_KEY"); // Será configurado após criar conta
-        
-        // Contact form handling - SOLUÇÃO MODERNA
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const submitBtn = this.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.textContent;
-                    
-                    // Show loading state
-                    submitBtn.textContent = 'Enviando...';
-                    submitBtn.disabled = true;
-                    
-                    // Get form data
-                    const templateParams = {
-                        from_name: document.getElementById('name').value,
-                        from_email: document.getElementById('email').value,
-                        subject: document.getElementById('subject').value,
-                        message: document.getElementById('message').value,
-                        to_email: 'hugohcsalis2@gmail.com'
-                    };
-                    
-                    // For now, simulate success (will be real after EmailJS setup)
-                    setTimeout(() => {
-                        // Show success message
-                        submitBtn.textContent = 'Mensagem Enviada!';
-                        submitBtn.style.backgroundColor = '#28a745';
-                        
-                        // Show success notification
-                        const notification = document.createElement('div');
-                        notification.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            right: 20px;
-                            background: #28a745;
-                            color: white;
-                            padding: 15px 20px;
-                            border-radius: 5px;
-                            z-index: 1000;
-                            font-family: inherit;
-                        `;
-                        notification.textContent = 'Mensagem enviada com sucesso! Responderemos em breve.';
-                        document.body.appendChild(notification);
-                        
-                        // Reset form
-                        contactForm.reset();
-                        
-                        // Remove notification and reset button
-                        setTimeout(() => {
-                            notification.remove();
-                            submitBtn.textContent = originalText;
-                            submitBtn.style.backgroundColor = '';
-                            submitBtn.disabled = false;
-                        }, 3000);
-                    }, 2000);
-                });
-            }
-        });
-    </script>
+
     <script src="script.js?v=6"></script>
 </body>
 </html>
