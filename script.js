@@ -66,12 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Contact form handling
+// Contact form handling with Formspree
 const contactForm = document.querySelector('.contact-form form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         
@@ -79,44 +77,28 @@ if (contactForm) {
         submitBtn.textContent = 'Enviando...';
         submitBtn.disabled = true;
         
-        // Get form data
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const subject = this.querySelectorAll('input[type="text"]')[1].value;
-        const message = this.querySelector('textarea').value;
+        // Let the form submit naturally to Formspree
+        // The success/error handling will be done by Formspree's redirect
         
-        // Simulate form submission (replace with actual service)
+        // Add a timeout to reset button if something goes wrong
         setTimeout(() => {
-            // Show success message
-            submitBtn.textContent = 'Mensagem Enviada!';
-            submitBtn.style.background = '#10b981';
-            
-            // Show success message and provide contact options
-            setTimeout(() => {
-                const userChoice = confirm('Mensagem preparada com sucesso!\n\nDeseja abrir seu cliente de email para enviar?\n\nOK = Abrir email\nCancelar = Copiar dados para contato manual');
-                
-                if (userChoice) {
-                    // Open email client
-                    const mailtoLink = `mailto:hugohcsalis2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)}`;
-                    window.location.href = mailtoLink;
-                } else {
-                    // Copy contact info to clipboard
-                    const contactInfo = `Email: hugohcsalis2@gmail.com\nAssunto: ${subject}\n\nNome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
-                    navigator.clipboard.writeText(contactInfo).then(() => {
-                        alert('Informações copiadas para a área de transferência!\nVocê pode colar em qualquer aplicativo de mensagem.');
-                    }).catch(() => {
-                        alert('Email de contato: hugohcsalis2@gmail.com\n\nSuas informações estão prontas para envio manual.');
-                    });
-                }
-                
-                // Reset form
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
-                submitBtn.disabled = false;
-            }, 1000);
-        }, 1500);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 10000);
     });
+    
+    // Handle successful submission (if user returns to page)
+    if (window.location.search.includes('success')) {
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Mensagem Enviada!';
+        submitBtn.style.background = '#10b981';
+        contactForm.reset();
+        
+        setTimeout(() => {
+            submitBtn.textContent = 'Enviar Mensagem';
+            submitBtn.style.background = '';
+        }, 3000);
+    }
 }
 
 // Typing animation for hero title
