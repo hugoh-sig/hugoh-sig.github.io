@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Monitoramento Ambiental Integrado</title>
+    <meta name="description" content="Painel interativo para monitoramento ambiental com dados de satélite, drone e estações meteorológicas">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <h1>Painel Ambiental</h1>
+                </div>
+                <div class="header-info">
+                    <div class="last-update">
+                        <i class="fas fa-clock"></i>
+                        <span>Última atualização: <span id="lastUpdate"></span></span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot active"></div>
+                        <span>Sistema Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- KPI Cards -->
+            <section class="kpi-section">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Temperatura Média</h3>
+                            <div class="kpi-value">
+                                <span class="value" id="avgTemp">24.5</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="kpi-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+2.1% vs mês anterior</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>NDVI Médio</h3>
+                            <div class="kpi-value">
+                                <span class="value" id="avgNDVI">0.72</span>
+                                <span class="unit"></span>
+                            </div>
+                            <div class="kpi-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5.3% vs mês anterior</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Precipitação</h3>
+                            <div class="kpi-value">
+                                <span class="value" id="precipitation">127</span>
+                                <span class="unit">mm</span>
+                            </div>
+                            <div class="kpi-trend negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-12.4% vs mês anterior</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <i class="fas fa-helicopter"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <h3>Área Mapeada</h3>
+                            <div class="kpi-value">
+                                <span class="value" id="mappedArea">1,247</span>
+                                <span class="unit">ha</span>
+                            </div>
+                            <div class="kpi-trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+18.7% vs mês anterior</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <!-- Temperature Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Variação de Temperatura (30 dias)</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-period="30">30d</button>
+                                <button class="chart-btn" data-period="90">90d</button>
+                                <button class="chart-btn" data-period="365">1a</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="temperatureChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- NDVI Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Índice de Vegetação (NDVI)</h3>
+                            <div class="chart-controls">
+                                <select id="ndviRegion" class="chart-select">
+                                    <option value="all">Todas as Regiões</option>
+                                    <option value="north">Região Norte</option>
+                                    <option value="south">Região Sul</option>
+                                    <option value="center">Região Central</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="ndviChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Precipitation Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Precipitação Acumulada</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-chart="precipitation">Mensal</button>
+                                <button class="chart-btn" data-chart="precipitation">Anual</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="precipitationChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="chart-card map-card">
+                        <div class="chart-header">
+                            <h3>Mapa Interativo</h3>
+                            <div class="chart-controls">
+                                <select id="mapLayer" class="chart-select">
+                                    <option value="satellite">Satélite</option>
+                                    <option value="ndvi">NDVI</option>
+                                    <option value="temperature">Temperatura</option>
+                                    <option value="drone">Levantamento Drone</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Sources -->
+            <section class="sources-section">
+                <div class="sources-grid">
+                    <div class="source-card">
+                        <div class="source-icon">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <div class="source-content">
+                            <h4>Dados de Satélite</h4>
+                            <p>Landsat 8/9 e Sentinel-2</p>
+                            <div class="source-status online">
+                                <i class="fas fa-circle"></i>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-card">
+                        <div class="source-icon">
+                            <i class="fas fa-helicopter"></i>
+                        </div>
+                        <div class="source-content">
+                            <h4>Levantamento Drone</h4>
+                            <p>Ortomosaicos de alta resolução</p>
+                            <div class="source-status online">
+                                <i class="fas fa-circle"></i>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-card">
+                        <div class="source-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="source-content">
+                            <h4>Estações Meteorológicas</h4>
+                            <p>Rede de 12 estações automáticas</p>
+                            <div class="source-status online">
+                                <i class="fas fa-circle"></i>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-card">
+                        <div class="source-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="source-content">
+                            <h4>Banco de Dados</h4>
+                            <p>PostgreSQL + PostGIS</p>
+                            <div class="source-status online">
+                                <i class="fas fa-circle"></i>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 Hugo Henrique - Painel de Monitoramento Ambiental</p>
+                    <p>Desenvolvido com tecnologias modernas para análise geoespacial</p>
+                </div>
+                <div class="footer-tech">
+                    <span>Tecnologias:</span>
+                    <div class="tech-badges">
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Chart.js</span>
+                        <span class="tech-badge">Leaflet</span>
+                        <span class="tech-badge">CSS3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeamento e Levantamentos com Drone | Hugo Henrique</title>
+    <meta name="description" content="Serviços especializados em mapeamento com drone, fotogrametria e análise socioambiental">
+    <link rel="stylesheet" href="drone-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-helicopter"></i>
+                    <span>Mapeamento com Drone</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        Painel Principal
+                    </a>
+                    <a href="#services" class="nav-link">Serviços</a>
+                    <a href="#impact" class="nav-link">Impacto Social</a>
+                    <a href="#projects" class="nav-link">Projetos</a>
+                    <a href="#contact" class="nav-link">Contato</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Mapeamento com Drone para Transformação Socioambiental</h1>
+                    <p class="hero-subtitle">
+                        Utilizando tecnologia de ponta para gerar dados precisos que apoiam 
+                        comunidades locais, conservação ambiental e desenvolvimento sustentável.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1,200+</span>
+                            <span class="stat-label">Hectares Mapeados</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Comunidades Atendidas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3cm</span>
+                            <span class="stat-label">Resolução Espacial</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Nossos Serviços
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i>
+                            Ver Projetos
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="drone-animation">
+                        <div class="drone">
+                            <i class="fas fa-helicopter"></i>
+                        </div>
+                        <div class="flight-path"></div>
+                    </div>
+                    <div class="coverage-areas">
+                        <div class="coverage-area area-1"></div>
+                        <div class="coverage-area area-2"></div>
+                        <div class="coverage-area area-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Serviços Especializados</h2>
+                <p>Soluções completas em mapeamento aéreo com foco em impacto socioambiental</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Mapeamento de Precisão</h3>
+                    <p>Ortomosaicos de alta resolução (até 3cm/pixel) para análise detalhada de uso do solo, cobertura vegetal e infraestrutura comunitária.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Resolução de 3-10 cm/pixel</li>
+                        <li><i class="fas fa-check"></i> Precisão cartográfica</li>
+                        <li><i class="fas fa-check"></i> Georreferenciamento GNSS</li>
+                        <li><i class="fas fa-check"></i> Entrega em múltiplos formatos</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Modelos Digitais de Elevação</h3>
+                    <p>Geração de MDT e MDS para análise de relevo, planejamento urbano, estudos de drenagem e prevenção de riscos ambientais.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Curvas de nível precisas</li>
+                        <li><i class="fas fa-check"></i> Análise de declividade</li>
+                        <li><i class="fas fa-check"></i> Estudos de drenagem</li>
+                        <li><i class="fas fa-check"></i> Modelagem 3D</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Monitoramento Ambiental</h3>
+                    <p>Acompanhamento temporal de mudanças na vegetação, erosão, recursos hídricos e impactos de atividades humanas no meio ambiente.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Índices de vegetação</li>
+                        <li><i class="fas fa-check"></i> Detecção de mudanças</li>
+                        <li><i class="fas fa-check"></i> Monitoramento de erosão</li>
+                        <li><i class="fas fa-check"></i> Análise multitemporal</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Mapeamento Participativo</h3>
+                    <p>Envolvimento de comunidades locais no processo de mapeamento, capacitação técnica e transferência de conhecimento.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Capacitação comunitária</li>
+                        <li><i class="fas fa-check"></i> Mapeamento colaborativo</li>
+                        <li><i class="fas fa-check"></i> Transferência de tecnologia</li>
+                        <li><i class="fas fa-check"></i> Empoderamento local</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Impact Section -->
+    <section id="impact" class="impact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Impacto Socioambiental</h2>
+                <p>Como a tecnologia de drone contribui para o desenvolvimento sustentável e justiça socioambiental</p>
+            </div>
+            <div class="impact-content">
+                <div class="impact-grid">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Regularização Fundiária</h3>
+                        <p>Apoio a comunidades tradicionais e assentamentos rurais na documentação e regularização de suas terras através de mapeamentos precisos e acessíveis.</p>
+                        <div class="impact-metrics">
+                            <span class="metric">8 comunidades</span>
+                            <span class="metric-label">beneficiadas</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Prevenção de Riscos</h3>
+                        <p>Identificação de áreas de risco ambiental em comunidades vulneráveis, contribuindo para políticas públicas de prevenção e mitigação de desastres.</p>
+                        <div class="impact-metrics">
+                            <span class="metric">450 famílias</span>
+                            <span class="metric-label">protegidas</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Conservação Participativa</h3>
+                        <p>Envolvimento de comunidades locais no monitoramento de áreas de conservação, fortalecendo a gestão territorial participativa e sustentável.</p>
+                        <div class="impact-metrics">
+                            <span class="metric">2,300 ha</span>
+                            <span class="metric-label">conservados</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Capacitação Técnica</h3>
+                        <p>Formação de lideranças locais em tecnologias de geoprocessamento, promovendo autonomia técnica e desenvolvimento de capacidades locais.</p>
+                        <div class="impact-metrics">
+                            <span class="metric">35 pessoas</span>
+                            <span class="metric-label">capacitadas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="impact-story">
+                    <div class="story-content">
+                        <h3>História de Impacto: Comunidade Quilombola do Vale Verde</h3>
+                        <p>
+                            Em parceria com a Comunidade Quilombola do Vale Verde, realizamos o mapeamento participativo 
+                            de 380 hectares de território tradicional. O trabalho envolveu 12 famílias no processo de 
+                            coleta de dados, capacitação em GPS e interpretação de imagens de drone.
+                        </p>
+                        <p>
+                            O mapeamento resultou na identificação de áreas de preservação permanente, nascentes d'água 
+                            e locais sagrados da comunidade, fornecendo subsídios técnicos para o processo de 
+                            regularização fundiária junto ao INCRA.
+                        </p>
+                        <div class="story-outcomes">
+                            <div class="outcome">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Território mapeado e documentado</span>
+                            </div>
+                            <div class="outcome">
+                                <i class="fas fa-check-circle"></i>
+                                <span>12 famílias capacitadas em geotecnologias</span>
+                            </div>
+                            <div class="outcome">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Processo de regularização fundiária iniciado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-visual">
+                        <div class="story-map" id="storyMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projetos Realizados</h2>
+                <p>Exemplos de trabalhos desenvolvidos com foco em impacto socioambiental</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjNGY0NmU1Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Nb25pdG9yYW1lbnRvIEZsb3Jlc3RhbDwvdGV4dD4KPC9zdmc+" alt="Monitoramento Florestal">
+                        <div class="project-overlay">
+                            <div class="project-tech">
+                                <span class="tech-tag">Drone</span>
+                                <span class="tech-tag">NDVI</span>
+                                <span class="tech-tag">Participativo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Monitoramento Florestal Participativo</h3>
+                        <p>Acompanhamento da regeneração florestal em área de 180 ha com envolvimento de comunidade local na coleta e análise de dados.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">180</span>
+                                <span class="metric-unit">hectares</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">24</span>
+                                <span class="metric-unit">meses</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">15</span>
+                                <span class="metric-unit">famílias</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMDZiNmQ0Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5NYXBlYW1lbnRvIFVyYmFubzwvdGV4dD4KPC9zdmc+" alt="Mapeamento Urbano">
+                        <div class="project-overlay">
+                            <div class="project-tech">
+                                <span class="tech-tag">Ortomosaico</span>
+                                <span class="tech-tag">MDE</span>
+                                <span class="tech-tag">Social</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Mapeamento de Assentamento Urbano</h3>
+                        <p>Levantamento detalhado de assentamento informal para apoio a políticas de regularização fundiária e melhoria habitacional.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">45</span>
+                                <span class="metric-unit">hectares</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">320</span>
+                                <span class="metric-unit">famílias</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">5cm</span>
+                                <span class="metric-unit">resolução</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDQwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjMjJjNTVlIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTI1IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Db25zZXJ2YcOnw6NvIEhpZHJpY2E8L3RleHQ+Cjwvc3ZnPg==" alt="Conservação Hídrica">
+                        <div class="project-overlay">
+                            <div class="project-tech">
+                                <span class="tech-tag">Hidrologia</span>
+                                <span class="tech-tag">Conservação</span>
+                                <span class="tech-tag">Comunidade</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Conservação de Recursos Hídricos</h3>
+                        <p>Mapeamento de nascentes e áreas de recarga hídrica em território quilombola para elaboração de plano de manejo participativo.</p>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="metric-value">12</span>
+                                <span class="metric-unit">nascentes</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">380</span>
+                                <span class="metric-unit">hectares</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">8</span>
+                                <span class="metric-unit">famílias</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tecnologia e Metodologia</h2>
+                <p>Equipamentos e processos utilizados para garantir qualidade e precisão</p>
+            </div>
+            <div class="tech-content">
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-helicopter"></i>
+                        </div>
+                        <h4>Equipamentos</h4>
+                        <ul>
+                            <li>Drone DJI Phantom 4 RTK</li>
+                            <li>Câmera RGB 20MP</li>
+                            <li>Sensor multiespectral</li>
+                            <li>GNSS de precisão</li>
+                        </ul>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Processamento</h4>
+                        <ul>
+                            <li>Pix4D Mapper</li>
+                            <li>Agisoft Metashape</li>
+                            <li>QGIS</li>
+                            <li>Python/GDAL</li>
+                        </ul>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Análises</h4>
+                        <ul>
+                            <li>Índices de vegetação</li>
+                            <li>Análise multitemporal</li>
+                            <li>Modelagem hidrológica</li>
+                            <li>Classificação de uso do solo</li>
+                        </ul>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Participação</h4>
+                        <ul>
+                            <li>Oficinas comunitárias</li>
+                            <li>Capacitação em GPS</li>
+                            <li>Interpretação participativa</li>
+                            <li>Validação local</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Vamos Conversar</h2>
+                <p>Interessado em desenvolver um projeto de mapeamento com impacto socioambiental?</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>hugohcsalis2@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Localização</h4>
+                            <p>Belo Horizonte - MG, Brasil</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Foco</h4>
+                            <p>Projetos com impacto socioambiental</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta">
+                    <h3>Pronto para fazer a diferença?</h3>
+                    <p>Vamos desenvolver juntos soluções que unam tecnologia e transformação social.</p>
+                    <a href="mailto:hugohcsalis2@gmail.com" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Entrar em Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 Hugo Henrique - Mapeamento com Drone</p>
+                    <p>Tecnologia a serviço da transformação socioambiental</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Painel Principal</a>
+                    <a href="#services">Serviços</a>
+                    <a href="#impact">Impacto Social</a>
+                    <a href="#projects">Projetos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="drone-script.js"></script>
+</body>
+</html>
